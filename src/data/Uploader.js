@@ -156,3 +156,21 @@ export function Uploader() {
     </div>
   );
 }
+
+/*
+ * Uploader — alat za razvoj, ne za krajnje korisnike. Služi da u Supabase bazu jednim klikom ubaciš test
+ * podatke iz fajlova (gosti, kabine, rezervacije), umesto da ručno puniš tabele dok učiš ili praviš aplikaciju.
+ *
+ * Prvo se brišu postojeći redovi (rezervacije, pa gosti i kabine), pa se opet ubacuju u redosledu koji bazi
+ * odgovara: rezervacije zavise od gostiju i kabina, zato moraju poslednje da se kreiraju. Funkcije
+ * createGuests / createCabins šalju podatke iz data-guests i data-cabins.
+ *
+ * U fajlu sa rezervacijama “gost 3” i “kabina 2” su zapravo redni brojevi u listi. Supabase sam dodeljuje
+ * prave ID-e u bazi, pa createBookings prvo pročita sve ID-eve iz tabele, pa ih mapira na rezervacije.
+ * Za svaku rezervaciju ponovo izračuna noći, cenu smeštaja, doručak, ukupno i status (prošlo / predstojeće /
+ * u toku) prema datumima, pomoću date-fns.
+ *
+ * Dugme “Upload ALL” resetuje sve (obično jednom). “Upload CURRENT bookings” samo osvežava rezervacije dok
+ * gosti i kabine ostaju — zgodno za svakodnevni rad. Slike kabina ovde nisu deo procesa; treba ih ručno
+ * dodati gde kurs kaže. Dok traje upload, dugmad su onemogućena da ne bi slučajno pokrenuo akciju dva puta.
+ */
