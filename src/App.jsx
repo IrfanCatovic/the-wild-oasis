@@ -27,6 +27,8 @@ import AppLayout from "./ui/AppLayout";
  * i šta se dešava za nepoznat URL (*).
  */
 
+const queryClient = new QueryClient();
+
 function App() {
   return (
     <>
